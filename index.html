@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalyani Pandharikar — Salesforce × AI Developer</title>
+<meta name="description" content="Kalyani Pandharikar — Salesforce Developer & Agentblazer Champion. 6+ years building CRM, ERP integrations, and AI-powered experiences on the Salesforce platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wall:#1479b8;          /* the wall in the photo */
+  --wall-deep:#0b4e86;
+  --wall-bright:#2f9cd0;
+  --ink:#0e2233;
+  --paper:#f5f9fc;
+  --paper-2:#eaf3fa;
+  --red:#e04545;           /* the plaid shirt */
+  --line:#cfe4f2;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05}
+a{color:inherit}
+::selection{background:var(--red);color:#fff}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  padding:14px clamp(20px,4vw,48px);transition:background .3s,box-shadow .3s}
+nav.scrolled{background:rgba(245,249,252,.9);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+nav .logo{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.05em;text-decoration:none;color:#fff;transition:color .3s}
+nav.scrolled .logo{color:var(--ink)}
+nav .links{display:flex;gap:26px}
+nav .links a{font-size:14px;font-weight:500;text-decoration:none;color:rgba(255,255,255,.85);transition:color .3s}
+nav.scrolled .links a{color:var(--ink)}
+nav .links a:hover{color:var(--red)}
+nav .links a.cta{border:1.5px solid currentColor;border-radius:99px;padding:5px 16px}
+@media(max-width:720px){nav .links a:not(.cta){display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;color:#fff;overflow:hidden;
+  background:radial-gradient(1100px 800px at 68% 42%, var(--wall-bright) 0%, var(--wall) 45%, var(--wall-deep) 100%)}
+.hero-photo{position:absolute;right:0;bottom:0;height:min(92svh,900px);width:auto;display:block;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+  filter:saturate(1.02)}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px);
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{font-family:var(--mono);font-size:clamp(12px,1.4vw,14px);letter-spacing:.14em;text-transform:uppercase;
+  color:#bfe3f7;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.hero .eyebrow::before{content:"";width:34px;height:1.5px;background:var(--red);display:inline-block}
+.hero h1{font-size:clamp(44px,8.5vw,108px);font-weight:800;letter-spacing:-.02em;max-width:11ch}
+.hero h1 .thin{font-weight:300;display:block;font-size:.52em;letter-spacing:0;color:#d7edfa;margin-top:8px}
+.hero .sub{margin-top:26px;max-width:46ch;font-size:clamp(15px,1.6vw,18px);color:#e4f2fb}
+.hero .sub b{color:#fff}
+.hero .actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-weight:600;font-size:15px;text-decoration:none;border-radius:99px;padding:12px 26px;transition:transform .2s,box-shadow .2s;display:inline-block}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 8px 24px rgba(224,69,69,.35)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.6);color:#fff}
+.btn-ghost:hover{border-color:#fff}
+.hero .badge{position:absolute;z-index:3;right:clamp(16px,4vw,60px);top:clamp(84px,12vh,120px);
+  background:rgba(11,34,51,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);
+  border-radius:14px;padding:10px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#dff1fc;
+  animation:float 5s ease-in-out infinite}
+.hero .badge b{color:#ffd166;font-weight:500}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ticker{position:absolute;bottom:0;left:0;right:0;z-index:4;border-top:1px solid rgba(255,255,255,.22);
+  background:rgba(11,45,72,.4);backdrop-filter:blur(6px);overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-block;padding:10px 0;font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:#cfe9f8;
+  animation:scroll 30s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{margin:0 22px}.ticker .dot{color:var(--red)}
+@media(max-width:860px){
+  .hero-photo{height:62svh;opacity:.92;
+    -webkit-mask-image:linear-gradient(180deg,transparent 2%,#000 32%);
+    mask-image:linear-gradient(180deg,transparent 2%,#000 32%)}
+  .hero-inner{justify-content:flex-end;padding-bottom:120px}
+  .hero .badge{top:76px;right:16px}
+}
+
+/* ---------- shared section ---------- */
+section{padding:clamp(64px,9vw,120px) clamp(20px,4vw,48px)}
+.wrap{max-width:1100px;margin:0 auto}
+.sec-label{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--wall);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-label::before{content:"";width:10px;height:10px;border:2.5px solid var(--red);border-radius:50%}
+h2.sec-title{font-size:clamp(30px,4.6vw,52px);font-weight:700;letter-spacing:-.015em;margin-bottom:18px;max-width:20ch}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.about-grid p{font-size:clamp(16px,1.8vw,19px);margin-bottom:18px;color:#28455c}
+.about-grid p b{color:var(--ink)}
+.stat-stack{display:grid;gap:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;transition:transform .25s,box-shadow .25s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(14,80,130,.1)}
+.stat .n{font-family:'Bricolage Grotesque';font-size:34px;font-weight:800;color:var(--wall)}
+.stat .l{font-size:14px;color:#4a6478}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr}}
+
+/* ---------- integration wizard ---------- */
+#wizard{background:var(--ink);color:#e8f2fa}
+#wizard .sec-label{color:#7cc4ea}
+#wizard h2{color:#fff}
+.wizard-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;margin-top:12px}
+.wizard-copy p{color:#b8d2e4;margin-bottom:16px}
+.wizard-copy p b{color:#fff}
+.chiplist{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px}
+.chip{font-family:var(--mono);font-size:12.5px;border:1px solid #2c4c66;border-radius:99px;padding:5px 13px;color:#9fc6e2}
+.flow{background:#122c42;border:1px solid #23445f;border-radius:20px;padding:clamp(20px,3vw,34px);position:relative;overflow:hidden}
+.flow::after{content:"INTEGRATION_WIZARD.flow";position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:11px;color:#4f7799;letter-spacing:.08em}
+.fnode{display:flex;align-items:center;gap:14px;background:#0e2233;border:1px solid #2b5273;border-radius:12px;
+  padding:13px 16px;font-family:var(--mono);font-size:13px;color:#d6ebfa;position:relative;z-index:1}
+.fnode .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.fnode small{display:block;color:#6f97b5;font-size:11px;font-family:'Instrument Sans'}
+.fconn{width:2px;height:26px;margin-left:32px;background:repeating-linear-gradient(180deg,#3f7ba6 0 5px,transparent 5px 10px);position:relative}
+.fconn::after{content:"";position:absolute;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--red);
+  animation:drip 2.2s linear infinite}
+@keyframes drip{from{top:-4px;opacity:1}to{top:100%;opacity:.2}}
+@media(max-width:820px){.wizard-grid{grid-template-columns:1fr}}
+
+/* ---------- AI ---------- */
+.ai-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.ai-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s}
+.ai-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(14,80,130,.12)}
+.ai-card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--wall),var(--red))}
+.ai-card h3{font-size:19px;margin-bottom:10px}
+.ai-card p{font-size:14.5px;color:#42607a}
+.ai-card .k{font-family:var(--mono);font-size:11.5px;color:var(--wall);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:12px}
+@media(max-width:820px){.ai-cards{grid-template-columns:1fr}}
+
+/* ---------- skills ---------- */
+#skills{background:var(--paper-2)}
+.skill-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:20px}
+.sgroup{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.sgroup h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.sgroup h3 .sq{width:10px;height:10px;background:var(--red);border-radius:3px;transform:rotate(45deg)}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-size:13px;background:var(--paper-2);border-radius:8px;padding:4px 11px;color:#2c4a63;transition:background .2s,color .2s}
+.tag:hover{background:var(--wall);color:#fff}
+@media(max-width:820px){.skill-groups{grid-template-columns:1fr}}
+
+/* ---------- experience ---------- */
+.xp{position:relative;margin-top:34px;padding-left:34px}
+.xp::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+  background:repeating-linear-gradient(180deg,var(--wall) 0 6px,transparent 6px 12px)}
+.job{position:relative;padding-bottom:42px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;background:var(--paper);
+  border:3px solid var(--wall);border-radius:50%}
+.job:first-child::before{background:var(--red);border-color:var(--red)}
+.job .when{font-family:var(--mono);font-size:12.5px;color:var(--wall);letter-spacing:.06em}
+.job h3{font-size:21px;margin:6px 0 2px}
+.job .co{font-weight:600;color:#4a6478;font-size:15px}
+.job ul{margin:12px 0 0 18px;color:#33526b;font-size:15px}
+.job li{margin-bottom:7px}
+.job li b{color:var(--ink)}
+
+/* ---------- creds ---------- */
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.cred{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.cred .ic{font-size:22px}
+.cred b{display:block;font-size:15.5px}
+.cred span{font-size:13.5px;color:#4a6478}
+@media(max-width:820px){.creds{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+#contact{background:radial-gradient(900px 600px at 50% 0%,var(--wall-bright),var(--wall) 55%,var(--wall-deep));color:#fff;text-align:center}
+#contact h2{font-size:clamp(34px,6vw,64px);font-weight:800;letter-spacing:-.02em}
+#contact p{max-width:46ch;margin:16px auto 30px;color:#dcefFA}
+#contact .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+#contact .mini{margin-top:44px;font-family:var(--mono);font-size:12.5px;color:#a8d3ec;letter-spacing:.06em}
+
+/* ---------- yarn easter egg ---------- */
+#yarn-btn{position:fixed;bottom:22px;right:22px;z-index:60;background:#fff;border:1.5px solid var(--line);
+  border-radius:99px;padding:10px 18px 10px 14px;font-family:'Instrument Sans';font-weight:600;font-size:13.5px;color:var(--ink);
+  cursor:pointer;box-shadow:0 10px 30px rgba(14,50,80,.18);display:flex;align-items:center;gap:8px;transition:transform .2s}
+#yarn-btn:hover{transform:translateY(-2px) rotate(-1deg)}
+#yarn-btn .ball{font-size:18px;display:inline-block;animation:rollball 4s ease-in-out infinite}
+@keyframes rollball{0%,100%{transform:rotate(0)}50%{transform:rotate(200deg)}}
+#yarn-modal{position:fixed;inset:0;z-index:70;background:rgba(11,34,51,.6);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+#yarn-modal.open{display:flex}
+.yarn-card{background:#fff8f2;border-radius:24px;max-width:520px;width:100%;padding:36px 34px;position:relative;
+  border:1px solid #f0dcc8;animation:pop .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.yarn-card h3{font-size:26px;margin-bottom:12px}
+.yarn-card p{font-size:15.5px;color:#5a4a3c;margin-bottom:12px}
+.yarn-card .close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#9b8672}
+.granny-row{display:flex;gap:10px;margin:18px 0 6px}
+.granny{width:54px;height:54px;border-radius:10px;position:relative;
+  background:
+   radial-gradient(circle at center,#fff8f2 0 8px,transparent 8px),
+   repeating-radial-gradient(circle at center,var(--g1) 0 4px,var(--g2) 4px 8px,var(--g3) 8px 12px,var(--g1) 12px 16px);
+  border:3px dashed var(--g3);animation:spin 14s linear infinite}
+.granny:nth-child(2){animation-duration:18s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="#top">KP<span style="color:var(--red)">_</span></a>
+  <div class="links">
+    <a href="#wizard">Integration Wizard</a>
+    <a href="#ai">AI on Platform</a>
+    <a href="#experience">Experience</a>
+    <a class="cta" href="mailto:kpandharikarcs@gmail.com">Hire me</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <img class="hero-photo" src="assets/kalyani.jpg" alt="Kalyani Pandharikar smiling, seated against a blue wall">
+  <div class="badge">⚡ Agentblazer Champion <b>2026</b></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Phoenix, AZ · Salesforce Developer · 6+ yrs</div>
+    <h1>Kalyani<br>Pandharikar
+      <span class="thin">I make Salesforce talk to everything — including AI.</span>
+    </h1>
+    <p class="sub">Six years of <b>Apex, LWC, and Experience Cloud</b>, wired into ERPs, campuses, and legacy systems through <b>MuleSoft, Informatica, and REST/SOAP</b> — now supercharged with <b>Agentforce and Einstein AI</b>.</p>
+    <div class="actions">
+      <a class="btn btn-red" href="mailto:kpandharikarcs@gmail.com">Let's talk →</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kalyani-pandharikar/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://www.salesforce.com/trailblazer/kpandharikar" target="_blank" rel="noopener">Trailblazer</a>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">
+      <span>APEX</span><span class="dot">◆</span><span>LWC</span><span class="dot">◆</span><span>AGENTFORCE</span><span class="dot">◆</span><span>MULESOFT</span><span class="dot">◆</span><span>EXPERIENCE CLOUD</span><span class="dot">◆</span><span>EINSTEIN AI</span><span class="dot">◆</span><span>INFORMATICA ETL</span><span class="dot">◆</span><span>FLOW</span><span class="dot">◆</span><span>FSL</span><span class="dot">◆</span><span>CI/CD</span><span class="dot">◆</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="rv">
+      <div class="sec-label">Hello, I'm Kalyani</div>
+      <h2 class="sec-title">Systems should talk to each other. I make sure they do.</h2>
+      <p>I've spent six years living where Salesforce meets everything else — <b>ERPs, student information systems, payment platforms, e-signature tools</b> — building the connective tissue that turns five disconnected systems into one experience.</p>
+      <p>Lately, that connective tissue thinks for itself. As an <b>Agentblazer Champion (2026)</b>, I build with Agentforce, Prompt Builder, and Einstein AI so the platforms I integrate don't just move data — they act on it.</p>
+      <p>From TCS in Pune to leading Experience Cloud builds for Arizona State University's Digital Prep platform at OneOrigin, one thing hasn't changed: I like hard integration problems, and I like shipping.</p>
+    </div>
+    <div class="stat-stack rv">
+      <div class="stat"><div class="n">6+</div><div class="l">years on the Salesforce platform</div></div>
+      <div class="stat"><div class="n">200+</div><div class="l">Visualforce pages migrated to LWC</div></div>
+      <div class="stat"><div class="n">40%</div><div class="l">manual processing time eliminated through automation</div></div>
+      <div class="stat"><div class="n">3×</div><div class="l">Salesforce certified — Platform Dev I, Admin, AI Associate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTEGRATION WIZARD ================= -->
+<section id="wizard">
+  <div class="wrap">
+    <div class="sec-label">Featured project</div>
+    <h2 class="sec-title">The Integration Wizard</h2>
+    <div class="wizard-grid">
+      <div class="wizard-copy rv">
+        <p>Every enterprise integration starts the same way: weeks of discovery, brittle point-to-point connections, and data that never quite matches. I built the <b>Integration Wizard</b> to end that.</p>
+        <p>It's a reusable, configuration-driven framework that connects Salesforce to ERP and campus systems — <b>PeopleSoft, CMSNext, Formstack, Genius, DocuSign</b> — through MuleSoft and Informatica ETL pipelines, with <b>real-time bidirectional sync</b>, retry-safe error handling, and field-level mapping an admin can change without a deploy.</p>
+        <p>The result at OneOrigin: <b>25% higher data accuracy</b>, integrations that used to take sprints stood up in days, and one source of truth across every connected system.</p>
+        <div class="chiplist">
+          <span class="chip">MuleSoft</span><span class="chip">Informatica ETL</span><span class="chip">REST / SOAP</span><span class="chip">OAuth 2.0</span><span class="chip">Platform Events</span><span class="chip">Queueable Apex</span>
+        </div>
+        <a class="btn btn-red" href="mailto:kpandharikarcs@gmail.com?subject=Tell me more about the Integration Wizard">Ask me how it works →</a>
+      </div>
+      <div class="flow rv" aria-label="Diagram of the Integration Wizard data flow">
+        <div class="fnode"><div class="ic" style="background:#1e88e5">☁️</div><div>Salesforce Core<small>Sales · Service · Experience Cloud</small></div></div>
+        <div class="fconn"></div>
+        <div class="fnode"><div class="ic" style="background:#e04545">🧙</div><div>Integration Wizard<small>mapping · transforms · retries · audit</small></div></div>
+        <div class="fconn"></div>
+        <div class="fnode"><div class="ic" style="background:#00897b">🔀</div><div>MuleSoft + Informatica<small>API-led · ETL pipelines</small></div></div>
+        <div class="fconn"></div>
+        <div class="fnode"><div class="ic" style="background:#5e6bb8">🏛️</div><div>PeopleSoft · CMSNext · DocuSign · Genius<small>real-time, bidirectional</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AI ================= -->
+<section id="ai">
+  <div class="wrap">
+    <div class="sec-label">Salesforce × AI</div>
+    <h2 class="sec-title">CRM that doesn't just store answers — it finds them.</h2>
+    <p style="max-width:60ch;color:#33526b">Agentblazer Champion, 2026. I bring AI to the platform where the data already lives, so it's grounded, governed, and actually useful.</p>
+    <div class="ai-cards">
+      <div class="ai-card rv"><span class="k">Agentforce</span><h3>Agents that do the work</h3><p>Designing Agentforce topics, actions, and conversational flows that resolve cases, qualify leads, and hand off to humans with full context — not just chatbots that apologize.</p></div>
+      <div class="ai-card rv"><span class="k">Prompt Builder</span><h3>Prompts as platform assets</h3><p>Grounded prompt templates wired to record data and Flow, so generated emails, summaries, and field updates are versioned, tested, and admin-editable.</p></div>
+      <div class="ai-card rv"><span class="k">Einstein AI</span><h3>Intelligence in the flow of work</h3><p>Einstein Copilot and GPT features embedded into service consoles and portals — AI-drafted replies, case summarization, and predictive routing where reps already work.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-label">Toolbox</div>
+    <h2 class="sec-title">Deep on platform, fluent across the stack.</h2>
+    <div class="skill-groups">
+      <div class="sgroup rv"><h3><span class="sq"></span>Salesforce Development</h3><div class="tags"><span class="tag">Apex</span><span class="tag">LWC</span><span class="tag">Aura</span><span class="tag">Visualforce</span><span class="tag">Flow</span><span class="tag">Batch Apex</span><span class="tag">Platform Events</span><span class="tag">SOQL / SOSL</span></div></div>
+      <div class="sgroup rv"><h3><span class="sq"></span>AI &amp; Automation</h3><div class="tags"><span class="tag">Agentforce</span><span class="tag">Prompt Builder</span><span class="tag">Einstein Copilot / GPT</span><span class="tag">Prompt Templates</span><span class="tag">Conversational Flows</span><span class="tag">AI-driven Automation</span></div></div>
+      <div class="sgroup rv"><h3><span class="sq"></span>Integration &amp; ERP</h3><div class="tags"><span class="tag">MuleSoft</span><span class="tag">Informatica ETL</span><span class="tag">REST / SOAP</span><span class="tag">OAuth</span><span class="tag">CMSNext ERP</span><span class="tag">PeopleSoft</span><span class="tag">SAP</span><span class="tag">AWS</span></div></div>
+      <div class="sgroup rv"><h3><span class="sq"></span>Clouds, DevOps &amp; Data</h3><div class="tags"><span class="tag">Experience Cloud</span><span class="tag">Sales Cloud</span><span class="tag">Service Cloud</span><span class="tag">FSL</span><span class="tag">Copado</span><span class="tag">Gearset</span><span class="tag">SFDX</span><span class="tag">Jenkins</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">SQL / Oracle / MySQL</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-label">Where I've shipped</div>
+    <h2 class="sec-title">Experience</h2>
+    <div class="xp">
+      <div class="job rv">
+        <div class="when">Sep 2024 — Present · Phoenix, AZ</div>
+        <h3>Sr. Salesforce Developer</h3><div class="co">OneOrigin</div>
+        <ul>
+          <li>Built Experience Cloud portals for <b>ASU's Digital Prep platform</b> — guest &amp; authenticated profiles, IdP certificate management, custom LWC.</li>
+          <li>Led integrations with PeopleSoft, Formstack, Genius, and DocuSign via MuleSoft &amp; Informatica — <b>25% higher data accuracy</b>.</li>
+          <li>Automated sales &amp; service workflows end-to-end, cutting <b>manual processing time by 40%</b>; Lightning migration lifted adoption <b>50%</b>.</li>
+          <li>Tuned CI/CD (SFDX, Jenkins, Docker) to cut <b>deployment time 30%</b>; built dashboards that improved forecasting accuracy 20%.</li>
+        </ul>
+      </div>
+      <div class="job rv">
+        <div class="when">Jan 2022 — Aug 2023</div>
+        <h3>Salesforce Developer</h3><div class="co">Capgemini</div>
+        <ul>
+          <li>Integrated Salesforce with the <b>CMSNext ERP</b> and third-party apps via REST/SOAP + OAuth; Informatica ETL improved data retrieval efficiency <b>40%</b>.</li>
+          <li>Shipped FSL, Apex, and LWC applications in a distributed cloud environment; CI/CD reduced deployment errors <b>25%</b>.</li>
+          <li>Migrated Process Builder to Flow, hardened security (OAuth, RBAC, field-level encryption), and mentored 7 new developers.</li>
+        </ul>
+      </div>
+      <div class="job rv">
+        <div class="when">Aug 2020 — Jan 2022</div>
+        <h3>Software Development Engineer</h3><div class="co">Tata Consultancy Services</div>
+        <ul>
+          <li>Built a Customer 360 on Service Cloud (Apex + LWC), improving support efficiency <b>35%</b>; integrated AWS, SAP &amp; third-party APIs.</li>
+          <li>Refactored legacy triggers into async Apex (Queueable, Future, Platform Events) — <b>50% faster</b>; led <b>200+ page</b> VF→LWC migration (+60% adoption).</li>
+          <li>Implemented Salesforce Shield &amp; field-level encryption for GDPR / HIPAA compliance.</li>
+        </ul>
+      </div>
+      <div class="job rv">
+        <div class="when">Jun 2018 — Aug 2020 · Pune, India</div>
+        <h3>Software Development Engineer</h3><div class="co">Tata Consultancy Services</div>
+        <ul>
+          <li>Built an IVI Weather Forecast system with Java, Spring Boot &amp; microservices — <b>30% faster</b> real-time data processing; reactive REST APIs with Spring WebFlux.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CREDS ================= -->
+<section id="creds" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-label">Proof</div>
+    <h2 class="sec-title">Certifications &amp; education</h2>
+    <div class="creds">
+      <div class="cred rv"><div class="ic">🏅</div><div><b>Salesforce Platform Developer I</b><span>Salesforce Certified</span></div></div>
+      <div class="cred rv"><div class="ic">🏅</div><div><b>Salesforce Certified Administrator</b><span>Salesforce Certified</span></div></div>
+      <div class="cred rv"><div class="ic">🤖</div><div><b>Salesforce AI Associate</b><span>Salesforce Certified · plus Agentblazer Champion 2026</span></div></div>
+      <div class="cred rv"><div class="ic">🎓</div><div><b>M.S. — University of Alabama, Tuscaloosa</b><span>2023 – 2024 · B.E. — Prof. Ram Meghe Institute of Technology &amp; Research, 2018</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap rv">
+    <h2>Have an org that needs to<br>talk to everything?</h2>
+    <p>I'm in Phoenix, AZ and open to Salesforce + AI roles. One email and I'll bring the flow diagrams.</p>
+    <div class="actions">
+      <a class="btn btn-red" href="mailto:kpandharikarcs@gmail.com">kpandharikarcs@gmail.com</a>
+      <a class="btn btn-ghost" href="tel:+16592100284">+1 (659) 210-0284</a>
+    </div>
+    <div class="mini">© <span id="yr"></span> Kalyani Pandharikar · Built with Apex-level attention to detail</div>
+  </div>
+</section>
+
+<!-- ================= YARN EASTER EGG ================= -->
+<button id="yarn-btn" aria-haspopup="dialog" aria-controls="yarn-modal">
+  <span class="ball">🧶</span> Psst… I also build without a keyboard
+</button>
+<div id="yarn-modal" role="dialog" aria-modal="true" aria-labelledby="yarn-title">
+  <div class="yarn-card">
+    <button class="close" aria-label="Close">✕</button>
+    <h3 id="yarn-title">Warning: uncommitted side project detected 🧶</h3>
+    <p>When I'm not integrating ERPs, I'm integrating yarn. I crochet — which, if you think about it, is just <b>loop-based programming with better error handling</b>: drop a stitch, catch it, retry.</p>
+    <div class="granny-row" aria-hidden="true">
+      <div class="granny" style="--g1:#e04545;--g2:#f2b134;--g3:#1479b8"></div>
+      <div class="granny" style="--g1:#1479b8;--g2:#7cc4ea;--g3:#e04545"></div>
+      <div class="granny" style="--g1:#f2b134;--g2:#e04545;--g3:#0e2233"></div>
+    </div>
+    <p style="font-size:13px;color:#9b8672">Granny squares: nature's LWC — small, reusable components composed into something bigger. Ask me about my stitch-per-sprint velocity.</p>
+  </div>
+</div>
+
+<script>
+// nav scroll state
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+// duplicate ticker for seamless loop
+const t=document.getElementById('ticker');t.innerHTML+=t.innerHTML;
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// yarn modal
+const m=document.getElementById('yarn-modal');
+document.getElementById('yarn-btn').addEventListener('click',()=>m.classList.add('open'));
+m.querySelector('.close').addEventListener('click',()=>m.classList.remove('open'));
+m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')});
+addEventListener('keydown',e=>{if(e.key==='Escape')m.classList.remove('open')});
+// year
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
